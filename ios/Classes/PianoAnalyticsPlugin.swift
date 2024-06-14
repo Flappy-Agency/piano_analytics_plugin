@@ -40,6 +40,16 @@ public class PianoAnalyticsPlugin: NSObject, FlutterPlugin {
                 return
             }
 
+            if let privacyDefaultMode = privacyDefaultMode {
+                pa.setConfiguration(ConfigurationBuilder()
+                    .withCollectDomain(collectDomain)
+                    .withSite(site)
+                    .withPrivacyDefaultMode(privacyDefaultMode)
+                    .build()
+                )
+                return
+            }
+
             pa.setConfiguration(ConfigurationBuilder()
                 .withCollectDomain(collectDomain)
                 .withSite(site)
