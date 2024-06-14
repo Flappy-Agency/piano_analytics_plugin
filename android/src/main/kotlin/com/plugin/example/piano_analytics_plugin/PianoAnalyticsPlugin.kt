@@ -1,16 +1,14 @@
 package com.plugin.example.piano_analytics_plugin
 
 import androidx.annotation.NonNull
-
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-
-import io.piano.analytics.Event;
-import io.piano.analytics.PianoAnalytics;
-import io.piano.analytics.Configuration;
+import io.piano.analytics.Configuration
+import io.piano.analytics.Event
+import io.piano.analytics.PianoAnalytics
 
 object PAEvents {
     const val SET_CONFIGURATION = "setConfiguration"
@@ -48,13 +46,23 @@ class PianoAnalyticsPlugin : FlutterPlugin, MethodCallHandler {
                         return
                     }
 
-                    if(privacyDefaultMode != null) {
+                    if (privacyDefaultMode != null) {
                         pa.setConfiguration(
                             Configuration.Builder()
                                 .withCollectDomain(collectDomain)
                                 .withSite(site)
                                 .withPrivacyDefaultMode(privacyDefaultMode)
                                 .build()
+                        )
+
+                        pa.privacyIncludeEvents(arrayOf("publisher.impression", "publisher.click"))
+                        pa.privacyIncludeProperties(
+                            arrayOf(
+                                "customobject",
+                                "customobject_certif_device",
+                                "customobject_certif_platform",
+                                "customobject_device"
+                            )
                         )
                         return
                     }
