@@ -14,10 +14,29 @@ public class PianoAnalyticsPlugin: NSObject, FlutterPlugin {
         case "setConfiguration":
             guard   let args = call.arguments as? Dictionary<String, AnyObject>,
                     let collectDomain = args["collectDomain"] as? String,
-                    let site = args["site"] as? Int
+                    let site = args["site"] as? Int,
+                    let privacyDefaultMode = args["privacyDefaultMode"] as? String?
             else{
-            
                 result(FlutterError(code: "500", message: "Error setConfiguration :: collectDomain and site parameters is required", details: nil))
+                return
+            }
+        
+                
+            if let privacyDefaultMode = privacyDefaultMode {
+                pa.setConfiguration(ConfigurationBuilder()
+                    .withCollectDomain(collectDomain)
+                    .withSite(site)
+                    .withPrivacyDefaultMode(privacyDefaultMode)
+                    .build()
+                )
+                
+                pa.privacyIncludeEvent("publisher.impression")
+                pa.privacyIncludeEvent("publisher.click")
+                pa.privacyIncludeProperty("customobject")
+                pa.privacyIncludeProperty("customobject_certif_device")
+                pa.privacyIncludeProperty("customobject_certif_platform")
+                pa.privacyIncludeProperty("customobject_device")
+                
                 return
             }
 
