@@ -47,11 +47,12 @@ class PianoAnalyticsPlugin : FlutterPlugin, MethodCallHandler {
                     }
 
                     if (privacyDefaultMode != null) {
+                        println("[PIANO_PLUGIN] privacyDefaultMode: $privacyDefaultMode")
                         pa.setConfiguration(
                             Configuration.Builder()
                                 .withCollectDomain(collectDomain)
                                 .withSite(site)
-                                .withPrivacyDefaultMode(privacyDefaultMode)
+                                .withPrivacyDefaultMode("Exempt")
                                 .build()
                         )
 
@@ -59,6 +60,13 @@ class PianoAnalyticsPlugin : FlutterPlugin, MethodCallHandler {
                         pa.privacyIncludeProperties(
                             arrayOf(
                                 "customobject",
+                                "onsitead_type",
+                                "onsitead_campaign",
+                                "onsitead_format",
+                                "onsitead_advertiser",
+                                "onsitead_advertiser",
+                                "onsitead_url",
+                                "onsitead_creation",
                                 "customobject_certif_device",
                                 "customobject_certif_platform",
                                 "customobject_device"
@@ -66,13 +74,6 @@ class PianoAnalyticsPlugin : FlutterPlugin, MethodCallHandler {
                         )
                         return
                     }
-
-                    pa.setConfiguration(
-                        Configuration.Builder()
-                            .withCollectDomain(collectDomain)
-                            .withSite(site)
-                            .build()
-                    )
                 }
 
                 PAEvents.SEND_EVENT -> {
