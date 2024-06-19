@@ -31,6 +31,13 @@ public class PianoAnalyticsPlugin: NSObject, FlutterPlugin {
                 )
                 
                 pa.privacyIncludeEvent("publisher.impression")
+                pa.privacyIncludeProperty("onsitead_type")
+                pa.privacyIncludeProperty("onsitead_campaign")
+                pa.privacyIncludeProperty("onsitead_format")
+                pa.privacyIncludeProperty("onsitead_advertiser")
+                pa.privacyIncludeProperty("onsitead_url")
+                pa.privacyIncludeProperty("onsitead_creation")
+
                 pa.privacyIncludeEvent("publisher.click")
                 pa.privacyIncludeProperty("customobject")
                 pa.privacyIncludeProperty("customobject_certif_device")
